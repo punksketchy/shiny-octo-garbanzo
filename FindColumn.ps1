@@ -1,11 +1,13 @@
-$siteCollection = "https://alabamagov.sharepoint.com/sites/Medicaid-MESModularity/MESPMO"
-$connection = Connect-PnPOnline -Url $siteCollection -PnPManagementShell
+$url = "https://alabamagov.sharepoint.com/sites/Medicaid-MESModularity/MESPMO"
+$connection = Connect-PnPOnline -Url $url -UseWebLogin
 
 $lists = Get-PnPList -Includes Fields
-$listTitle = Get-PnPList
+
+$output = "ListTitle,FieldTitle,FieldInternalName`n"
 foreach($list in $lists) {
-    $list.Fields | Select-Object Title, InternalName, @{
-        label='List Title'
-        expression={$listTitle | Select-Object Title}
+    $fields = $list.Fields | Select-Object Title, InternalName
+    foreach ($field in $fields) {
+        $output += "$($list.Title),$($field.Title),$($field.FieldInternalName)`n"
     }
 }
+$output | Out-File -FilePath .\PMOServices-Fields.csv
