@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "create-pn-p-list-client-side-solution",
+    "id": "94997902-d3c1-439b-be4b-66be255fff8b",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.15.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "CreatePnPList description"
+      },
+      "longDescription": {
+        "default": "CreatePnPList description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "create-pn-p-list Feature",
+        "description": "The feature that activates elements of the create-pn-p-list solution.",
+        "id": "8c817fda-cbe5-4333-9293-a61df39fa641",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/create-pn-p-list.sppkg"
+  }
+}

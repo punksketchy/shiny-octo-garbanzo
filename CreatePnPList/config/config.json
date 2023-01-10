@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "create-pn-p-list-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/createPnPList/CreatePnPListWebPart.js",
+          "manifest": "./src/webparts/createPnPList/CreatePnPListWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "CreatePnPListWebPartStrings": "lib/webparts/createPnPList/loc/{locale}.js"
+  }
+}

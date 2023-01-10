@@ -1,0 +1,16 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "version": "1.15.2",
+    "libraryName": "create-pn-p-list",
+    "libraryId": "94997902-d3c1-439b-be4b-66be255fff8b",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "CreatePnPList",
+    "solutionShortDescription": "CreatePnPList description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}
