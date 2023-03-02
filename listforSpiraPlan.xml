@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:msxsl="urn:schemas-microsoft-com:xslt" exclude-result-prefixes="msxsl">
+  <xsl:template match="/RequirementData">
+    <table class="DataGrid" style="width:100%">
+      <tr>
+        <th>Req #</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Type</th>
+        <th>Priority</th>
+        <th>Status</th>
+        <th>Author</th>
+        <th>Owner</th>
+        <th>Creation Date</th>
+        <th>Test Coverage</th>
+        <th>Task Progress</th>
+        <th>Last Modified</th>
+        <th>Release #</th>
+        <th>Component</th>
+        <th>Estimate</th>
+        <th>Est. Effort</th>
+        <th>Task Effort</th>
+        <th>Actual Effort</th>
+        <th>Remaining Effort</th>
+        <th>Projected Effort</th>
+        <xsl:for-each select="Requirement[1]/CustomProperties/CustomProperty">
+          <th>
+            <xsl:value-of select="Alias"/>
+          </th>
+        </xsl:for-each>
+      </tr>
+      <xsl:for-each select="Requirement">
+        <tr>
+          <td>
+            <xsl:value-of select="RequirementId"/>
+          </td>
+          <td>
+            <xsl:attribute name="style">
+              padding-left: <xsl:value-of select="string-length(IndentLevel)*2"/>px;
+            </xsl:attribute>
+            <xsl:if test="IsSummary='True'">
+              <b>
+                <xsl:value-of select="Name"/>
+              </b>
+            </xsl:if>
+            <xsl:if test="IsSummary='False'">
+              <xsl:value-of select="Name"/>
+            </xsl:if>
+          </td>
+          <td>
+            <xsl:value-of select="Description" disable-output-escaping="yes"/>
+          </td>
+          <td>
+            <xsl:value-of select="RequirementTypeName"/>
+          </td>
+          <td>
+            <xsl:value-of select="ImportanceName"/>
+          </td>
+          <td>
+            <xsl:value-of select="RequirementStatusName"/>
+          </td>
+          <td>
+            <xsl:value-of select="AuthorName"/>
+          </td>
+          <td>
+            <xsl:value-of select="OwnerName"/>
+          </td>
+          <td class="Date">
+            <xsl:call-template name="format-date">
+              <xsl:with-param name="datetime" select="CreationDate" />
+            </xsl:call-template>
+          </td>
+          <td>
+            <xsl:value-of select="CoverageCountTotal"/><xsl:text> </xsl:text>Covering,
+            <xsl:value-of select="CoverageCountFailed"/><xsl:text> </xsl:text>Failed,
+            <xsl:value-of select="CoverageCountPassed"/><xsl:text> </xsl:text>Passed,
+            <xsl:value-of select="CoverageCountBlocked"/><xsl:text> </xsl:text>Blocked,
+            <xsl:value-of select="CoverageCountCaution"/><xsl:text> </xsl:text>Caution
+          </td>
+          <td>
+            <xsl:value-of select="TaskCount"/><xsl:text> </xsl:text>Tasks;
+            <xsl:value-of select="TaskPercentOnTime"/>%<xsl:text> </xsl:text>On Schedule,
+            <xsl:value-of select="TaskPercentLateFinish"/>%<xsl:text> </xsl:text>Running Late,
+            <xsl:value-of select="TaskPercentNotStart"/>%<xsl:text> </xsl:text>Starting Late,
+            <xsl:value-of select="TaskPercentLateStart"/>%<xsl:text> </xsl:text>Not Started
+          </td>
+          <td class="Date">
+            <xsl:call-template name="format-date">
+              <xsl:with-param name="datetime" select="LastUpdateDate" />
+            </xsl:call-template>
+          </td>
+          <td>
+            <xsl:value-of select="ReleaseVersionNumber"/>
+          </td>
+          <td>
+            <xsl:value-of select="ComponentName"/>
+          </td>
+          <td class="Timespan">
+            <xsl:value-of select="EstimatePoints" />
+          </td>
+          <td class="Timespan">
+            <xsl:value-of select="EstimatedEffort" />
+          </td>
+          <td class="Timespan">
+            <xsl:value-of select="TaskEstimatedEffort" />
+          </td>
+          <td class="Timespan">
+            <xsl:value-of select="TaskActualEffort" />
+          </td>
+          <td class="Timespan">
+            <xsl:value-of select="TaskRemainingEffort" />
+          </td>
+          <td class="Timespan">
+            <xsl:value-of select="TaskProjectedEffort" />
+          </td>
+          <xsl:for-each select="CustomProperties/CustomProperty">
+            <xsl:choose>
+              <xsl:when test="Type='Date'">
+                <td class="Date">
+                  <xsl:call-template name="format-date">
+                    <xsl:with-param name="datetime" select="Value" />
+                  </xsl:call-template>
+                </td>
+              </xsl:when>
+              <xsl:otherwise>
+                <td>
+                  <xsl:value-of select="Value" disable-output-escaping="yes"/>
+                </td>
+              </xsl:otherwise>
+            </xsl:choose>
+          </xsl:for-each>
+        </tr>
+      </xsl:for-each>
+    </table>
+  </xsl:template>
+  <xsl:template name="format-date">
+    <xsl:param name="datetime"/>
+    <xsl:variable name="date" select="substring-before($datetime, 'T')" />
+    <xsl:variable name="year" select="substring-before($date, '-')" />
+    <xsl:variable name="month" select="substring-before(substring-after($date, '-'), '-')" />
+    <xsl:variable name="day" select="substring-after(substring-after($date, '-'), '-')" />
+    <xsl:variable name="time" select="substring-before(substring-after($datetime, 'T'), '.')" />
+    <xsl:variable name="monthname">
+      <xsl:choose>
+        <xsl:when test="$month='01'">
+          <xsl:value-of select="'Jan'"/>
+        </xsl:when>
+        <xsl:when test="$month='02'">
+          <xsl:value-of select="'Feb'"/>
+        </xsl:when>
+        <xsl:when test="$month='03'">
+          <xsl:value-of select="'Mar'"/>
+        </xsl:when>
+        <xsl:when test="$month='04'">
+          <xsl:value-of select="'Apr'"/>
+        </xsl:when>
+        <xsl:when test="$month='05'">
+          <xsl:value-of select="'May'"/>
+        </xsl:when>
+        <xsl:when test="$month='06'">
+          <xsl:value-of select="'Jun'"/>
+        </xsl:when>
+        <xsl:when test="$month='07'">
+          <xsl:value-of select="'Jul'"/>
+        </xsl:when>
+        <xsl:when test="$month='08'">
+          <xsl:value-of select="'Aug'"/>
+        </xsl:when>
+        <xsl:when test="$month='09'">
+          <xsl:value-of select="'Sep'"/>
+        </xsl:when>
+        <xsl:when test="$month='10'">
+          <xsl:value-of select="'Oct'"/>
+        </xsl:when>
+        <xsl:when test="$month='11'">
+          <xsl:value-of select="'Nov'"/>
+        </xsl:when>
+        <xsl:when test="$month='12'">
+          <xsl:value-of select="'Dec'"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="''" />
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:value-of select="concat($day, '-' ,$monthname, '-', $year , ' ', $time)" />
+  </xsl:template>
+</xsl:stylesheet>
