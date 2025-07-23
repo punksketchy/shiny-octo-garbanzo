@@ -1,5 +1,5 @@
 #Parameters
-$TenantURL =  "https://mdho365.sharepoint.com/"
+<#$TenantURL =  "https://mdho365.sharepoint.com/"
 $UserID="i:0#.f|membership|jmattis@health.maryland.gov"
  
  
@@ -26,4 +26,12 @@ $Sites | ForEach-Object {
 }
 
 
-#Read more: https://www.sharepointdiary.com/2018/07/sharepoint-online-powershell-to-remove-user-from-all-sites.html#ixzz7VkfGtM7K
+#Read more: https://www.sharepointdiary.com/2018/07/sharepoint-online-powershell-to-remove-user-from-all-sites.html#ixzz7VkfGtM7K#>
+
+$SiteURL = "https://mdho365.sharepoint.com/teams/oea/"   
+Connect-PnPOnline -Url $SiteURL  -useWebLogin
+Get-PnPUser -Identity "dmurphy@yourdomain.com"
+# Define user email
+$userEmail = "user@yourdomain.com"
+# Remove user permissions
+Remove-PnPUser -LoginName $userEmail
