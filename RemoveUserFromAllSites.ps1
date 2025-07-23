@@ -7,7 +7,7 @@ param(
 )
 
 # Connect to the site collection
-Connect-PnPOnline -Url $SiteCollectionUrl -Interactive
+Connect-PnPOnline -Url $SiteCollectionUrl -UseWebLogin
 
 # Get all webs (including root web)
 $webs = Get-PnPSubWeb -Recurse
