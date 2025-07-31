@@ -28,10 +28,16 @@ $Sites | ForEach-Object {
 
 #Read more: https://www.sharepointdiary.com/2018/07/sharepoint-online-powershell-to-remove-user-from-all-sites.html#ixzz7VkfGtM7K#>
 
-$SiteURL = "https://mdho365.sharepoint.com/teams/oea/"   
+<#$SiteURL = "https://mdho365.sharepoint.com/teams/oea/"   
 Connect-PnPOnline -Url $SiteURL  -useWebLogin
-Get-PnPUser -Identity "dmurphy@yourdomain.com"
+Get-PnPUser -Identity "bedwards1@health.maryland.gov"
 # Define user email
-$userEmail = "user@yourdomain.com"
+$userEmail = "bedwards1@health.maryland.gov"
 # Remove user permissions
-Remove-PnPUser -LoginName $userEmail
+Remove-PnPUser -LoginName $userEmail#>
+#$SiteURL = "https://mdho365.sharepoint.com/sites/MMTINTERNAL/"
+#$SiteURL = "https://mdho365.sharepoint.com/teams/oea/"
+$SiteURL = "https://mdho365.sharepoint.com/sites/MMT-CERT/"
+$userEmail = "natalie.mediouni@maryland.gov"
+Connect-PnPOnline -Url $SiteURL -UseWebLogin
+Get-PnPUser | Where-Object Email -eq $userEmail | Remove-PnPUser

@@ -1,10 +1,13 @@
-param(
+<#param(
     [Parameter(Mandatory = $true)]
-    [string]$SiteCollectionUrl,
+    "https://mdho365.sharepoint.com/teams/oea/PMO/" = $SiteCollectionUrl,
 
     [Parameter(Mandatory = $true)]
-    [string]$UserLogin
-)
+    "Shanna Summons" = $UserLogin
+)#>
+
+$SiteCollectionUrl = "https://mdho365.sharepoint.com/sites/MMT-CERT"
+$UserLogin = "Betty Edwards"
 
 # Connect to the site collection
 Connect-PnPOnline -Url $SiteCollectionUrl -UseWebLogin
