@@ -1,6 +1,6 @@
 ﻿# Variables
-$siteUrl = "https://mdho365.sharepoint.com/sites/ePREP-CERT"
-$csvPath = "C:\code\shiny-octo-garbanzo\TopNavLinks.csv" #csv path
+$siteUrl = "https://mdho365.sharepoint.com/sites/OCEP"
+$csvPath = "C:\code\shiny-octo-garbanzo\TopNavLinksPMO.csv" #csv path
  
 # Connect to SharePoint site
 Connect-PnPOnline -Url $siteUrl -UseWebLogin
