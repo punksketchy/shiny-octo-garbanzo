@@ -19,7 +19,7 @@ foreach ($site in $sites) {
 	$siteUrl = $site.SiteUrl
 	Write-Host "Processing site: $siteUrl" -ForegroundColor Cyan
 	try {
-		Connect-PnPOnline -Url $siteUrl -Interactive
+		Connect-PnPOnline -Url $siteUrl -UseWebLogin
 		Remove-PnPUser -Identity $UserLogin -ErrorAction Stop
 		Write-Host "Removed $UserLogin from $siteUrl" -ForegroundColor Green
 	} catch {

@@ -35,9 +35,9 @@ Get-PnPUser -Identity "bedwards1@health.maryland.gov"
 $userEmail = "bedwards1@health.maryland.gov"
 # Remove user permissions
 Remove-PnPUser -LoginName $userEmail#>
-#$SiteURL = "https://mdho365.sharepoint.com/sites/MMTINTERNAL/"
+$SiteURL = "https://mdho365.sharepoint.com/sites/MMTINTERNAL/"
 #$SiteURL = "https://mdho365.sharepoint.com/teams/oea/"
-$SiteURL = "https://mdho365.sharepoint.com/sites/MMT-CERT/"
-$userEmail = "alan.frazier@maryland.gov"
+#$SiteURL = "https://mdho365.sharepoint.com/sites/MMT-CERT/"
+$userEmail = "SLingamsetty@health.maryland.gov"
 Connect-PnPOnline -Url $SiteURL -UseWebLogin
 Get-PnPUser | Where-Object Email -eq $userEmail | Remove-PnPUser
