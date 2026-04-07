@@ -1,5 +1,5 @@
 ﻿# Variables
-$siteUrl = "https://mdho365.sharepoint.com/sites/BPR-GRV"
+$siteUrl = "https://mdho365.sharepoint.com/sites/CCC/"
 $csvPath = "C:\code\shiny-octo-garbanzo\TopNavLinksPMO.csv" #csv path
  
 # Connect to SharePoint site
